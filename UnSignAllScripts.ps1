@@ -1,9 +1,5 @@
-Set-ExecutionPolicy ByPass
 $psfiles = Get-ChildItem('*.ps1')
 $removeScriptPath = $PSScriptRoot + '\Remove-AuthenticodeSignature.ps1'
-$signScriptPath = $PSScriptRoot + '\SignPowershellScript.ps1'
 foreach ($file in $psfiles) {
     . $removeScriptPath $file
-    . $signScriptPath $file
 }
-Set-ExecutionPolicy RemoteSigned
