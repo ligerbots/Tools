@@ -1,6 +1,6 @@
 
 winget install --scope=machine Microsoft.VisualStudioCode
-winget install --scope=machine Google.GoogleDrive
+. $PSScriptRoot/LenovoStuff.ps1
 winget install --scope=machine PuTTY.PuTTY
 winget install --scope=machine M2Team.NanaZip
 winget install --scope=machine WinDirStat.WinDirStat
