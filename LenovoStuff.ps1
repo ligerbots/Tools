@@ -1,11 +1,7 @@
-if ((Get-CimInstance -ClassName Win32_ComputerSystem | Select-Object Manufacturer).Manufacturer -ne "LENOVO")
+if (-not (Get-ComputerInfo | Select-Object CsSystemFamily).CsSystemFamily.Contains("ThinkPad"))
 {
-    if  (-not (Get-CimInstance -ClassName Win32_ComputerSystem | Select-Object Manufacturer).Model.StartsWith("2")) {
-        Write-Warning "Not a Lenovo ThinkPad, exiting."
-        Exit
-    }
+        Write-Warning "Not a ThinkPad, exiting."
 }
-
 # Lenovo Commercial Vantage might require a NuGet upgrade
 Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force | Out-Null
 winget install --scope machine --disable-interactivity --accept-source-agreements --silent "Lenovo Commercial Vantage"
