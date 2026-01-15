@@ -77,3 +77,21 @@ If (-Not (Test-Path $EdgeSUURL)) {
 Set-ItemProperty -Path $EdgeSUURL -Name '1' -Value $HomeURL -Force
 
 Write-Host "Microsoft Edge start page set to: $HomeURL"
+
+# Define the registry path for Explorer advanced settings
+$registryPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
+
+# Enable showing hidden files, folders, and drives (set 'Hidden' to 1)
+Set-ItemProperty -Path $registryPath -Name Hidden -Value 1 -Type DWORD -Force
+
+# Disable hiding file extensions for known file types (set 'HideFileExt' to 0)
+Set-ItemProperty -Path $registryPath -Name HideFileExt -Value 0 -Type DWORD -Force
+
+# Optional: Ensure protected operating system files are still hidden (set 'ShowSuperHidden' to 0, which is the default for security)
+# If you want to show these too, change the Value to 1.
+Set-ItemProperty -Path $registryPath -Name ShowSuperHidden -Value 1 -Type DWORD -Force
+
+# Restart the Explorer shell for changes to take effect immediately
+Stop-Process -Name explorer -Force
+# The taskbar and desktop might disappear briefly and then reappear as explorer restarts.
+
