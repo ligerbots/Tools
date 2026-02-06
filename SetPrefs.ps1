@@ -16,6 +16,9 @@ Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name sShortTime -Val
 Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name sTimeFormat -Value "HH:mm:ss";
 Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name sYearMonth -Value "yyyy MMMM";
 
+# change date format on welcome screen & default user as well
+Copy-UserInternationalSettingsToSystem -WelcomeScreen $true -NewUser $true
+
 # start app installs
 Enable-WindowsOptionalFeature -Online -FeatureName TelnetClient
 
